@@ -6,7 +6,7 @@ const Group = props => (
   <tr>
     <td>{props.group.name}</td>
     {/* Comma separated friend names */}
-    <td>{props.group.friends}</td>      
+    <td>{props.group.friends.map(friend => friend+',  ')}</td>      
     <td>{props.group.balance}</td>
   </tr>
 )
@@ -21,13 +21,12 @@ export default class GroupsList extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/groups/')
       .then(response => {
-        this.setState({ exercises: response.data })
+        this.setState({ groups: response.data })
       })
       .catch((error) => {
         console.log(error);
       })
   }
-
 
   groupList() {
     return this.state.groups.map(currentGroup => {

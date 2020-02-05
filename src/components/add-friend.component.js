@@ -5,18 +5,19 @@ export default class AddFriend extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangename = this.onChangename.bind(this);
     this.onSubmit = this.
       onSubmit.bind(this);
 
     this.state = {
-      username: ''
+      id: 0,
+      name: ''
     }
   }
 
-  onChangeUsername(e) {
+  onChangename(e) {
     this.setState({
-      username: e.target.value
+      name: e.target.value
     })
   }
 
@@ -24,7 +25,7 @@ export default class AddFriend extends Component {
     e.preventDefault();
 
     const friend = {
-      username: this.state.username
+      name: this.state.name
     }
 
     console.log(friend);
@@ -33,7 +34,7 @@ export default class AddFriend extends Component {
       .then(res => console.log(res.data));
 
     this.setState({
-      username: ''
+      name: ''
     })
   }
 
@@ -43,12 +44,12 @@ export default class AddFriend extends Component {
         <h3>Add Friend</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label>Username: </label>
+            <label>name: </label>
             <input type="text"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
+              value={this.state.name}
+              onChange={this.onChangename}
             />
           </div>
           <div className="form-group">
