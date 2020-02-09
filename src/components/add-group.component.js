@@ -10,12 +10,12 @@ export default class AddGroup extends Component {
     this.onSubmit = this.
       onSubmit.bind(this);
 
-      this.multiselectRef = React.createRef();
+    this.multiselectRef = React.createRef();
 
     this.state = {
       name: '',
-      friends: [{ name: 'Ali'}, { name: 'Usman'}, { name: 'Adeel' }, { name: 'Ihrar' }],
-      selectedValue:[]
+      friends: [{ name: 'Ali' }, { name: 'Usman' }, { name: 'Adeel' }, { name: 'Ihrar' }],
+      selectedValue: []
     }
   }
 
@@ -25,7 +25,7 @@ export default class AddGroup extends Component {
         if (response.data.length > 0) {
           this.setState({
             friends: response.data.map(friend => {
-              return {name:friend.name, id:friend._id};
+              return { name: friend.name, id: friend._id };
             })
           })
           // let check=this.state.friends;
@@ -55,6 +55,7 @@ export default class AddGroup extends Component {
     axios.post('http://localhost:5000/groups/add', group)
       .then(res => console.log(res.data));
 
+    this.multiselectRef.current.resetSelectedValues();
     this.setState({
       name: '',
       friends: []

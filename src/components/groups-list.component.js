@@ -50,6 +50,10 @@ export default class GroupsList extends Component {
             { this.groupList() }
           </tbody>
         </table>
+        <div className="pull-right">
+        <Link to="/add_group" className="nav-link">Add Group</Link>
+          </div>
+
       </div>
     )
   }

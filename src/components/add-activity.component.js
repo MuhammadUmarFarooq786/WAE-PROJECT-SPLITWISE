@@ -8,6 +8,7 @@ export default class AddGroup extends Component {
 
     this.onChangeGroupname = this.onChangeGroupname.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeAmount = this.onChangeAmount.bind(this);
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
@@ -18,6 +19,21 @@ export default class AddGroup extends Component {
       date: new Date(),
       groups: []
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/groups/')
+      .then(response => {
+        console.log(response.data[0].name);
+        this.setState({ 
+          groups: response.data.map(group => {
+            return {name:group.name, id:group._id};
+          }) 
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   onChangeGroupname(e) {
@@ -38,6 +54,11 @@ export default class AddGroup extends Component {
     })
   }
 
+  onChangeAmount(e){
+    this.setState({
+      amount: e.target.value
+    })
+  }
   onSubmit(e) {
     e.preventDefault();
 
@@ -76,8 +97,8 @@ export default class AddGroup extends Component {
               {
                 this.state.groups.map(function (group) {
                   return <option
-                    key={group}
-                    value={group}>{group}
+                    key={group.id}
+                    value={group.name}>{group.name}
                   </option>;
                 })
               }
@@ -89,7 +110,7 @@ export default class AddGroup extends Component {
               required
               className="form-control"
               value={this.state.description}
-              onChange={this.onChangeName}
+              onChange={this.onChangeDescription}
             />
           </div>
           <div className="form-group">
@@ -98,7 +119,7 @@ export default class AddGroup extends Component {
               required
               className="form-control"
               value={this.state.amount}
-              onChange={this.onChangeName}
+              onChange={this.onChangeAmount}
             />
           </div>
           <div className="form-group">

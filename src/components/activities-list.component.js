@@ -4,9 +4,10 @@ import axios from 'axios';
 
 const Activity = props => (
   <tr>
-    <td>{props.activity.name}</td>
-    <td>{props.activity.group}</td>
-    <td>{props.activity.balance}</td>
+    <td>{props.activity.description}</td>
+    <td>{props.activity.groupname}</td>
+    <td>{props.activity.amount}</td>
+    <td>{props.activity.date}</td>
   </tr>
 )
 
@@ -41,15 +42,20 @@ export default class ActivitiesList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Activity Description</th>
+              <th>Description</th>
               <th>Group</th>
               <th>Amount</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
             { this.activityList() }
           </tbody>
         </table>
+        <div className="pull-right">
+        <Link to="/add_activity" className="nav-link">Add Activity</Link>
+          </div>
+
       </div>
     )
   }

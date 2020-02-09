@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Friend = props => (
   <tr>
     <td>{props.friend.name}</td>
@@ -48,6 +48,10 @@ export default class FriendsList extends Component {
             { this.friendList() }
           </tbody>
         </table>
+        <div className="pull-right">
+        <Link to="/add_friend" className="nav-link">Add Friend</Link>
+        <FontAwesomeIcon icon="add" />
+          </div>
       </div>
     )
   }
